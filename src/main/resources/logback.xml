@@ -1,0 +1,25 @@
+<configuration debug="true">
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="sanghoon.study.logging.mask.logback.MaskingPatternLayout">
+                <pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %logger - %msg%n</pattern>
+
+                <enabled>true</enabled>
+                <!-- triggers 비우면 "항상 마스킹 시도" -->
+                <triggers>010-,@</triggers>
+                <!-- <triggers>010-,@</triggers> -->
+
+                <rule>phone|(\b01[016789]-?)\d{3,4}(-?\d{4}\b)|$1****$2</rule>
+                <rule>email|([A-Za-z0-9._%+-]{2})[A-Za-z0-9._%+-]*(@[A-Za-z0-9.-]+\.[A-Za-z]{2,})|$1****$2</rule>
+            </layout>
+        </encoder>
+
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
